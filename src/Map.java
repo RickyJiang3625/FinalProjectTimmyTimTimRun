@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -5,7 +6,7 @@ import java.io.FileNotFoundException;
 
 public class Map {
     private Tile[][] map;
-    public Map(){
+    public Map()  {
         generateMap();
 
     }
@@ -36,6 +37,9 @@ public class Map {
                     worldData[i][j] = 1;
                 if (d.charAt(j) == 'A')
                     worldData[i][j] = 0;
+                if (d.charAt(j) == 'D'){
+                    worldData[i][j] = 2;
+                }
             }
         }
         return worldData;
@@ -45,9 +49,9 @@ public class Map {
         return map;
     }
 
-    public void generateMap(){
+    public void generateMap()  {
         int[][] mapData=getMap("map/map1");
-        map=new Tile[4][4];
+        map=new Tile[18][32];
         for (int r = 0; r < map.length; r++) {
             for (int c = 0; c < map[0].length; c++) {
                 Tile t = new Tile(mapData[r][c]);

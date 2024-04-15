@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Frame extends JFrame implements Runnable {
     private Panel p;
 
-    public Frame(String display) {
+    public Frame(String display)  {
         super(display);
 
         int frameWidth = 500;
