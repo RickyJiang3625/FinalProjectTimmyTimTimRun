@@ -1,16 +1,21 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Panel extends JPanel {
+public class Panel extends JPanel implements KeyListener {
+
     private BufferedImage image;
     private Map map;
 
     public Panel()  {
-    map=new Map();
+        this.addKeyListener(this);
+        this.setFocusable(true);
+        map=new Map();
     }
 
     public BufferedImage loadImage(String fileName) {
@@ -32,13 +37,20 @@ public class Panel extends JPanel {
         g.drawImage(image,0,0,1920,1080,null);
         int x=0;
         int y=0;
+
+        int playerX=map.getPlayer().getCol();
+        int playerY=map.getPlayer().getRow();
+
         for(int row=0;row<map.getMap().length;row++){
             for(int col=0;col<map.getMap()[0].length;col++){
                 Tile t=map.getMap()[row][col];
                 g.drawImage(t.getImage(),x,y,null);
                 x+=60;
-
+            if(playerX==col && playerY==row){
+                g.drawImage(map.getPlayer().getImage(),playerX*60,playerY*60,null);
             }
+            }
+
             x=0;
             y+=60;
         }
@@ -46,5 +58,32 @@ public class Panel extends JPanel {
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        char key= e.getKeyChar();
+        if(key=='w'){
+            map.movePlayer("W");
+        }
+        if(key=='a'){
+            map.movePlayer("A");
+        }
+        if(key == 's'){
+            map.movePlayer("S");
+        }
+        if(key == 'd'){
+            map.movePlayer("D");
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+
+    }
 }

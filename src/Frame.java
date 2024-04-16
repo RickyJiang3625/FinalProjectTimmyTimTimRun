@@ -31,7 +31,5 @@ public class Frame extends JFrame implements Runnable {
         while(true){
             p.repaint();
         }
-
-
     }
 }

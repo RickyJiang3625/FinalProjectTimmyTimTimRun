@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 public class Map {
+    private Player player;
     private Tile[][] map;
     public Map()  {
         generateMap();
@@ -40,6 +41,9 @@ public class Map {
                 if (d.charAt(j) == 'D'){
                     worldData[i][j] = 2;
                 }
+                if (d.charAt(j) == 'Y'){
+                this.player= new Player(i,j);
+                }
             }
         }
         return worldData;
@@ -47,6 +51,10 @@ public class Map {
 
     public Tile[][] getMap() {
         return map;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void generateMap()  {
@@ -58,9 +66,25 @@ public class Map {
                 map[r][c] = t;
             }
         }
-
     }
-}
+    public void movePlayer(String nesw){
+        int playerRow= player.getRow();
+        int playerCol=player.getCol();
+        if(nesw.equals("W")){
+            player.setRow(playerRow-1);
+        }
+        if(nesw.equals("S")){
+            player.setRow(playerRow+1);
+        }
+        if(nesw.equals("D")){
+            player.setCol(playerCol+1);
+        }
+        if (nesw.equals("A")) {
+        player.setCol(playerCol-1);
+        }
+        }
+    }
+
 
 
 
