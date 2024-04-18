@@ -42,7 +42,7 @@ public class Map {
                     worldData[i][j] = 2;
                 }
                 if (d.charAt(j) == 'Y'){
-                this.player= new Player(i,j);
+                this.player= new Player(i*60,j*60);
                 }
             }
         }
@@ -59,7 +59,7 @@ public class Map {
 
     public void generateMap()  {
         int[][] mapData=getMap("map/map1");
-        map=new Tile[18][32];
+        map=new Tile[17][32];
         for (int r = 0; r < map.length; r++) {
             for (int c = 0; c < map[0].length; c++) {
                 Tile t = new Tile(mapData[r][c]);
@@ -71,16 +71,16 @@ public class Map {
         int playerRow= player.getRow();
         int playerCol=player.getCol();
         if(nesw.equals("W")){
-            player.setRow(playerRow-1);
+            player.setRow((playerRow-65));
         }
         if(nesw.equals("S")){
-            player.setRow(playerRow+1);
+            player.setRow((playerRow+65));
         }
         if(nesw.equals("D")){
-            player.setCol(playerCol+1);
+            player.setCol((playerCol+65));
         }
         if (nesw.equals("A")) {
-        player.setCol(playerCol-1);
+        player.setCol((playerCol-65));
         }
         }
     }
