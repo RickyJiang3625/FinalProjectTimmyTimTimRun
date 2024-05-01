@@ -38,24 +38,22 @@ public class Panel extends JPanel implements KeyListener {
         int x=0;
         int y=0;
 
-        int playerX=map.getPlayer().getCol()/60;
-        int playerY=map.getPlayer().getRow()/60;
+        int playerX=map.getPlayer().getCol();
+        int playerY=map.getPlayer().getRow();
+        g.drawRect(map.getPlayer().getCol()*20,map.getPlayer().getRow()*20,20,20);
 
-
-
-        g.drawImage(map.getPlayer().getImage(),playerX*60,playerY*60,null);
         for(int row=0;row<map.getMap().length;row++){
             for(int col=0;col<map.getMap()[0].length;col++){
                 Tile t=map.getMap()[row][col];
                 g.drawImage(t.getImage(),x,y,null);
-                x+=60;
+                x+=20;
             if(playerX==col && playerY==row){
-                g.drawImage(map.getPlayer().getImage(),playerX*60,playerY*60,null);
+                g.drawImage(map.getPlayer().getImage(),playerX*20,playerY*20,null);
             }
             }
 
             x=0;
-            y+=60;
+            y+=20;
         }
 
     }

@@ -3,16 +3,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Rectangle;
 public class Player {
     private BufferedImage image;
     private int row;
     private int col;
+    private Rectangle hitbox;
     private final String IMAGE="spriteimages/tempImage.png";
     public Player(int row,int col){
     this.row=row;
     this.col=col;
     image=loadImage(IMAGE);
-    image=resize(image,60,60);
+    image=resize(image,20,20);
+    hitbox=new Rectangle(col*20,row*20,20,20);
     }
 
     public BufferedImage getImage() {

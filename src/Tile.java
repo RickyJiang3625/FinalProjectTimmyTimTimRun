@@ -18,11 +18,11 @@ public class Tile {
         this.tileType=tileType;
         if(this.tileType==1){
             image = loadImage(GRASS);
-            image=resize(image,60,60);
+            image=resize(image,20,20);
         }
         if(this.tileType==2){
             image= loadImage(DIRT);
-            image=resize(image,60,60);
+            image=resize(image,20,20);
         }
     }
     public BufferedImage loadImage(String fileName) {
