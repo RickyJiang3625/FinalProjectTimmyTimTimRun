@@ -33,8 +33,6 @@ public class Panel extends JPanel implements KeyListener {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        image=loadImage("platformimages/sky.jpg");
-        g.drawImage(image,0,0,1920,1080,null);
         int x=0;
         int y=0;
 

@@ -35,12 +35,13 @@ public class Map {
             String d = fileData.get(i);
             for (int j = 0; j < d.length(); j++) {
                 if (d.charAt(j) == 'P')
-                    worldData[i][j] = 1;
-                if (d.charAt(j) == 'A')
                     worldData[i][j] = 0;
+
                 if (d.charAt(j) == 'D'){
-                    worldData[i][j] = 2;
+                    worldData[i][j] = 1;
                 }
+                if (d.charAt(j) == 'A')
+                    worldData[i][j] = 2;
                 if (d.charAt(j) == 'Y'){
                 this.player= new Player(i,j);
                 }
@@ -58,7 +59,7 @@ public class Map {
     }
 
     public void generateMap()  {
-        int[][] mapData=getMap("map/map1");
+        int[][] mapData = getMap("map/map1");
         map=new Tile[54][96];
         for (int r = 0; r < map.length; r++) {
             for (int c = 0; c < map[0].length; c++) {
