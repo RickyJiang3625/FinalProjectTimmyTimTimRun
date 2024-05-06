@@ -38,7 +38,8 @@ public class Panel extends JPanel implements KeyListener {
 
         int playerX=map.getPlayer().getCol();
         int playerY=map.getPlayer().getRow();
-        g.drawRect(map.getPlayer().getCol()*20,map.getPlayer().getRow()*20,20,20);
+
+
 
         for(int row=0;row<map.getMap().length;row++){
             for(int col=0;col<map.getMap()[0].length;col++){
@@ -47,6 +48,8 @@ public class Panel extends JPanel implements KeyListener {
                 x+=20;
             if(playerX==col && playerY==row){
                 g.drawImage(map.getPlayer().getImage(),playerX*20,playerY*20,null);
+                g.drawRect(map.getPlayer().getCol()*20,map.getPlayer().getRow()*20,20,20);
+
             }
             }
 
@@ -85,4 +88,5 @@ public class Panel extends JPanel implements KeyListener {
 
 
     }
+
 }

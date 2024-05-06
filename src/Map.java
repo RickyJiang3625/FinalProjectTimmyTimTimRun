@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -7,6 +8,7 @@ import java.io.FileNotFoundException;
 public class Map {
     private Player player;
     private Tile[][] map;
+    private int[][] worldData;
     public Map()  {
         generateMap();
 
@@ -29,7 +31,7 @@ public class Map {
         int rows = fileData.size();
         int cols = fileData.get(0).length();
 
-        int[][] worldData = new int[rows][cols];
+         worldData = new int[rows][cols];
 
         for (int i = 0; i < fileData.size(); i++) {
             String d = fileData.get(i);
@@ -72,18 +74,77 @@ public class Map {
         int playerRow=player.getRow();
         int playerCol=player.getCol();
         if(nesw.equals("W")){
-            player.setRow((playerRow-3));
+            if(canMoveUp()){
+            player.setRow((playerRow-1));}
+            else{
+                player.setRow((playerRow));
+            }
         }
         if(nesw.equals("S")){
+            if(canMoveDown()){
             player.setRow((playerRow+1));
+            }
+            else{
+                player.setRow(playerRow);
+            }
         }
         if(nesw.equals("D")){
-            player.setCol((playerCol+2));
+            if(canMoveRight()){
+            player.setCol((playerCol+1));
+        }
+            else{
+                player.setCol(playerCol);
+            }
         }
         if (nesw.equals("A")) {
-        player.setCol((playerCol-2));
+            if(canMoveLeft()){
+        player.setCol((playerCol-1));
+        }
+            else{
+                player.setCol(playerCol);
+            }
         }
         }
+    public boolean canMoveUp(){
+
+        int playerX=getPlayer().getCol();
+        int playerY=getPlayer().getRow();
+        if(playerY==0){
+            return false;
+        }
+        int tile=worldData[playerY-1][playerX];
+        return tile != 0 && tile != 1;
+    }
+
+
+
+    public boolean canMoveDown(){
+        int playerX=getPlayer().getCol();
+        int playerY=getPlayer().getRow();
+        if(playerY==54){
+            return false;
+        }
+        int tile=worldData[playerY+1][playerX];
+        return tile != 0 && tile != 1;
+    }
+    public boolean canMoveLeft(){
+        int playerX=getPlayer().getCol();
+        int playerY=getPlayer().getRow();
+        if(playerX==0){
+            return false;
+        }
+        int tile=worldData[playerY][playerX-1];
+        return tile != 0 && tile != 1;
+    }
+    public boolean canMoveRight(){
+        int playerX=getPlayer().getCol();
+        int playerY=getPlayer().getRow();
+        if(playerX==95){
+            return false;
+        }
+        int tile=worldData[playerY][playerX+1];
+        return tile != 0 && tile != 1;
+    }
     }
 
 

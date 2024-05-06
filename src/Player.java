@@ -38,6 +38,11 @@ public class Player {
         this.col = col;
     }
 
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
+
     public BufferedImage loadImage(String fileName) {
         try {
             BufferedImage image;
