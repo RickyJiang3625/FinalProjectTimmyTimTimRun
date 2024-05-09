@@ -37,13 +37,13 @@ public class Map {
             String d = fileData.get(i);
             for (int j = 0; j < d.length(); j++) {
                 if (d.charAt(j) == 'P')
-                    worldData[i][j] = 0;
+                    worldData[i][j] = 2;
 
                 if (d.charAt(j) == 'D'){
                     worldData[i][j] = 1;
                 }
                 if (d.charAt(j) == 'A')
-                    worldData[i][j] = 2;
+                    worldData[i][j] = 0;
                 if (d.charAt(j) == 'Y'){
                 this.player= new Player(i,j);
                 }
@@ -75,7 +75,7 @@ public class Map {
         int playerCol=player.getCol();
         if(nesw.equals("W")){
             if(canMoveUp()){
-            player.setRow((playerRow-1));}
+            player.setRow((playerRow-10));}
             else{
                 player.setRow((playerRow));
             }
@@ -91,7 +91,9 @@ public class Map {
         if(nesw.equals("D")){
             if(canMoveRight()){
             player.setCol((playerCol+1));
+
         }
+
             else{
                 player.setCol(playerCol);
             }
@@ -113,7 +115,7 @@ public class Map {
             return false;
         }
         int tile=worldData[playerY-1][playerX];
-        return tile != 0 && tile != 1;
+        return tile != 2 && tile != 1;
     }
 
 
@@ -125,7 +127,7 @@ public class Map {
             return false;
         }
         int tile=worldData[playerY+1][playerX];
-        return tile != 0 && tile != 1;
+        return tile != 2 && tile != 1;
     }
     public boolean canMoveLeft(){
         int playerX=getPlayer().getCol();
@@ -134,7 +136,7 @@ public class Map {
             return false;
         }
         int tile=worldData[playerY][playerX-1];
-        return tile != 0 && tile != 1;
+        return tile != 2 && tile != 1;
     }
     public boolean canMoveRight(){
         int playerX=getPlayer().getCol();
@@ -143,8 +145,9 @@ public class Map {
             return false;
         }
         int tile=worldData[playerY][playerX+1];
-        return tile != 0 && tile != 1;
+        return tile != 2 && tile != 1;
     }
+
     }
 
 

@@ -12,7 +12,7 @@ public class Tile {
     private final String DIRT="platformimages/dirt.png";
     private final String SKY="platformimages/tempsky.png";
     private int tileType;
-    private String[] pngs={GRASS,DIRT,SKY};
+    private String[] pngs={SKY,DIRT,GRASS};
     public Tile(int type){
 
         this.setTileType(type);
