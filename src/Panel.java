@@ -57,7 +57,9 @@ public class Panel extends JPanel implements KeyListener {
             y+=20;
         }
 
+
     }
+
 
 
     @Override

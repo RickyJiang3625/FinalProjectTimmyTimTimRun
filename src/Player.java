@@ -8,7 +8,18 @@ public class Player {
     private BufferedImage image;
     private int row;
     private int col;
+
+    public boolean isFalling() {
+        return falling;
+    }
+
+    public void setFalling(boolean falling) {
+        this.falling = falling;
+    }
+
     private Rectangle hitbox;
+    private boolean falling=true;
+    private boolean jumping;
     private final String IMAGE="spriteimages/tempImage.png";
     public Player(int row,int col){
     this.row=row;

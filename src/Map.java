@@ -59,6 +59,9 @@ public class Map {
     public Player getPlayer() {
         return player;
     }
+    public int[][] getWorldData(){
+        return worldData;
+    }
 
     public void generateMap()  {
         int[][] mapData = getMap("map/map1");
@@ -73,9 +76,22 @@ public class Map {
     public void movePlayer(String nesw){
         int playerRow=player.getRow();
         int playerCol=player.getCol();
+
+        if(player.isFalling()){
+            player.setRow(playerRow+1);
+            if(worldData[playerRow+1][playerCol]==1 || worldData[playerRow+1][playerCol]==2){
+                player.setFalling(false);
+                player.setRow(playerRow);
+            }
+            }
+        if(worldData[playerRow+1][playerCol]==0){
+            player.setFalling(true);
+        }
+
         if(nesw.equals("W")){
             if(canMoveUp()){
-            player.setRow((playerRow-10));}
+            player.setRow((playerRow-1));
+            }
             else{
                 player.setRow((playerRow));
             }
@@ -92,7 +108,8 @@ public class Map {
             if(canMoveRight()){
             player.setCol((playerCol+1));
 
-        }
+            }
+
 
             else{
                 player.setCol(playerCol);
@@ -147,6 +164,7 @@ public class Map {
         int tile=worldData[playerY][playerX+1];
         return tile != 2 && tile != 1;
     }
+
 
     }
 
