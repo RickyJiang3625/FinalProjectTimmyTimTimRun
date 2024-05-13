@@ -9,6 +9,8 @@ public class Map {
     private Player player;
     private Tile[][] map;
     private int[][] worldData;
+    private int playerRow;
+    private int  playerCol;
     public Map()  {
         generateMap();
 
@@ -74,12 +76,12 @@ public class Map {
         }
     }
     public void movePlayer(String nesw){
-        int playerRow=player.getRow();
-        int playerCol=player.getCol();
+        playerRow=player.getRow();
+        playerCol=player.getCol();
 
         if(player.isFalling()){
             player.setRow(playerRow+1);
-            if(worldData[playerRow+1][playerCol]==1 || worldData[playerRow+1][playerCol]==2){
+            if(worldData[playerRow+1][playerCol] ==1 || worldData[playerRow+1][playerCol]==2){
                 player.setFalling(false);
                 player.setRow(playerRow);
             }
@@ -89,16 +91,23 @@ public class Map {
         }
 
         if(nesw.equals("W")){
+
             if(canMoveUp()){
+                player.setFalling(false);
             player.setRow((playerRow-1));
+
             }
             else{
                 player.setRow((playerRow));
+
             }
+            player.setFalling(true);
         }
         if(nesw.equals("S")){
+
             if(canMoveDown()){
-            player.setRow((playerRow+1));
+                player.setFalling(false);
+                player.setRow((playerRow+1));
             }
             else{
                 player.setRow(playerRow);
@@ -126,47 +135,40 @@ public class Map {
         }
     public boolean canMoveUp(){
 
-        int playerX=getPlayer().getCol();
-        int playerY=getPlayer().getRow();
-        if(playerY==0){
+        if(playerRow==0){
             return false;
         }
-        int tile=worldData[playerY-1][playerX];
+        int tile=worldData[playerRow-1][playerCol];
         return tile != 2 && tile != 1;
     }
 
 
 
     public boolean canMoveDown(){
-        int playerX=getPlayer().getCol();
-        int playerY=getPlayer().getRow();
-        if(playerY==54){
+
+        if(playerRow==54){
             return false;
         }
-        int tile=worldData[playerY+1][playerX];
+        int tile=worldData[playerRow+1][playerCol];
         return tile != 2 && tile != 1;
     }
     public boolean canMoveLeft(){
-        int playerX=getPlayer().getCol();
-        int playerY=getPlayer().getRow();
-        if(playerX==0){
+
+        if(playerCol==0){
             return false;
         }
-        int tile=worldData[playerY][playerX-1];
+        int tile=worldData[playerRow][playerCol-1];
         return tile != 2 && tile != 1;
     }
     public boolean canMoveRight(){
-        int playerX=getPlayer().getCol();
-        int playerY=getPlayer().getRow();
-        if(playerX==95){
+
+        if(playerCol==95){
             return false;
         }
-        int tile=worldData[playerY][playerX+1];
+        int tile=worldData[playerRow][playerCol+1];
         return tile != 2 && tile != 1;
     }
-
-
-    }
+}
 
 
 
