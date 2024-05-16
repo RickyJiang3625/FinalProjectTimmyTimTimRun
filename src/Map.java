@@ -15,6 +15,7 @@ public class Map {
         generateMap();
 
     }
+
     private int[][] getMap(String fileName) {
         File f = new File(fileName);
         Scanner s = null;
@@ -58,6 +59,7 @@ public class Map {
         return map;
     }
 
+
     public Player getPlayer() {
         return player;
     }
@@ -73,102 +75,100 @@ public class Map {
                 Tile t = new Tile(mapData[r][c]);
                 map[r][c] = t;
             }
-        }
-    }
-    public void movePlayer(String nesw){
-        playerRow=player.getRow();
-        playerCol=player.getCol();
+        }}
+        public void movePlayer(String nesw){
+            playerRow=player.getRow();
+            playerCol=player.getCol();
 
-        if(player.isFalling()){
-            player.setRow(playerRow+1);
-            if(worldData[playerRow+1][playerCol] ==1 || worldData[playerRow+1][playerCol]==2){
-                player.setFalling(false);
-                player.setRow(playerRow);
+            if(player.isFalling()){
+                player.setRow(playerRow+1);
+                if(worldData[playerRow+1][playerCol] ==1 || worldData[playerRow+1][playerCol]==2){
+                    player.setFalling(false);
+                    player.setRow(playerRow);
+                }
             }
-            }
-        if(worldData[playerRow+1][playerCol]==0){
-            player.setFalling(true);
-        }
-
-        if(nesw.equals("W")){
-
-            if(canMoveUp()){
-                player.setFalling(false);
-            player.setRow((playerRow-1));
-
-            }
-            else{
-                player.setRow((playerRow));
-
-            }
-            player.setFalling(true);
-        }
-        if(nesw.equals("S")){
-
-            if(canMoveDown()){
-                player.setFalling(false);
-                player.setRow((playerRow+1));
-            }
-            else{
-                player.setRow(playerRow);
-            }
-        }
-        if(nesw.equals("D")){
-            if(canMoveRight()){
-            player.setCol((playerCol+1));
-
+            if(worldData[playerRow+1][playerCol]==0){
+                player.setFalling(true);
             }
 
+            if(nesw.equals("W")){
 
-            else{
-                player.setCol(playerCol);
+                if(canMoveUp()){
+                    player.setFalling(false);
+                    player.setRow((playerRow-1));
+
+                }
+                else{
+                    player.setRow((playerRow));
+
+                }
+                player.setFalling(true);
+            }
+            if(nesw.equals("S")){
+
+                if(canMoveDown()){
+                    player.setFalling(false);
+                    player.setRow((playerRow+1));
+                }
+                else{
+                    player.setRow(playerRow);
+                }
+            }
+            if(nesw.equals("D")){
+                if(canMoveRight()){
+                    player.setCol((playerCol+1));
+
+                }
+
+
+                else{
+                    player.setCol(playerCol);
+                }
+            }
+            if (nesw.equals("A")) {
+                if(canMoveLeft()){
+                    player.setCol((playerCol-1));
+                }
+                else{
+                    player.setCol(playerCol);
+                }
             }
         }
-        if (nesw.equals("A")) {
-            if(canMoveLeft()){
-        player.setCol((playerCol-1));
-        }
-            else{
-                player.setCol(playerCol);
+        public boolean canMoveUp(){
+
+            if(playerRow==0){
+                return false;
             }
+            int tile=worldData[playerRow-1][playerCol];
+            return tile != 2 && tile != 1;
         }
+
+
+
+        public boolean canMoveDown(){
+
+            if(playerRow==54){
+                return false;
+            }
+            int tile=worldData[playerRow+1][playerCol];
+            return tile != 2 && tile != 1;
         }
-    public boolean canMoveUp(){
+        public boolean canMoveLeft(){
 
-        if(playerRow==0){
-            return false;
+            if(playerCol==0){
+                return false;
+            }
+            int tile=worldData[playerRow][playerCol-1];
+            return tile != 2 && tile != 1;
         }
-        int tile=worldData[playerRow-1][playerCol];
-        return tile != 2 && tile != 1;
-    }
+        public boolean canMoveRight(){
 
-
-
-    public boolean canMoveDown(){
-
-        if(playerRow==54){
-            return false;
-        }
-        int tile=worldData[playerRow+1][playerCol];
-        return tile != 2 && tile != 1;
-    }
-    public boolean canMoveLeft(){
-
-        if(playerCol==0){
-            return false;
-        }
-        int tile=worldData[playerRow][playerCol-1];
-        return tile != 2 && tile != 1;
-    }
-    public boolean canMoveRight(){
-
-        if(playerCol==95){
-            return false;
-        }
-        int tile=worldData[playerRow][playerCol+1];
-        return tile != 2 && tile != 1;
-    }
-}
+            if(playerCol==95){
+                return false;
+            }
+            int tile=worldData[playerRow][playerCol+1];
+            return tile != 2 && tile != 1;
+        }}
 
 
 

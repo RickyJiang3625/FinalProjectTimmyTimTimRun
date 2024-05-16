@@ -9,16 +9,10 @@ public class Player {
     private int row;
     private int col;
 
-    public boolean isFalling() {
-        return falling;
-    }
 
-    public void setFalling(boolean falling) {
-        this.falling = falling;
-    }
 
     private Rectangle hitbox;
-    private boolean falling=true;
+    private boolean falling;
     private boolean jumping;
     private final String IMAGE="spriteimages/tempImage.png";
     public Player(int row,int col){
@@ -52,7 +46,21 @@ public class Player {
     public Rectangle getHitbox() {
         return hitbox;
     }
+    public boolean isFalling() {
+        return falling;
+    }
 
+    public void setFalling(boolean falling) {
+        this.falling = falling;
+    }
+
+    public boolean isJumping() {
+        return jumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        this.jumping = jumping;
+    }
 
     public BufferedImage loadImage(String fileName) {
         try {
