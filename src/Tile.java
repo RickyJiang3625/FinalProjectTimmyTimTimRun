@@ -11,8 +11,9 @@ public class Tile {
     private final String GRASS="platformimages/grass.png";
     private final String DIRT="platformimages/dirt.png";
     private final String SKY="platformimages/tempsky.png";
+    private final String END="spriteimages/tempEnd.png";
     private int tileType;
-    private String[] pngs={SKY,DIRT,GRASS};
+    private String[] pngs={SKY,DIRT,GRASS,END};
     public Tile(int type){
 
         this.setTileType(type);

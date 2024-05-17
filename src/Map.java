@@ -50,6 +50,9 @@ public class Map {
                 if (d.charAt(j) == 'Y'){
                 this.player= new Player(i,j);
                 }
+                if(d.charAt(j) =='E'){
+                    worldData[i][j] = 4;
+                }
             }
         }
         return worldData;

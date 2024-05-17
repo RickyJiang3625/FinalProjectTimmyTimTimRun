@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class Panel extends JPanel implements KeyListener {
 
@@ -16,6 +15,9 @@ public class Panel extends JPanel implements KeyListener {
     private int yy;
     private int[][] test;
     private boolean gameOver;
+    private int endRow;
+    private int endCol;
+
     public Panel()  {
         this.addKeyListener(this);
         this.setFocusable(true);
@@ -56,8 +58,9 @@ public class Panel extends JPanel implements KeyListener {
             }
             if(!gameOver) {
                 g.drawImage(map.getPlayer().getImage(), xx, yy, null);
+                g.drawRect(xx,yy,20,20);
 
-                if(test[(int) (Math.ceil((float) yy /20)+1)][(int) Math.ceil((float) xx /20)]==0){
+                if(test[(int) (Math.floor((float) yy /20)+1)][(int) Math.floor((float) xx /20)]==0){
                     if(map.getPlayer().isJumping()){
                         map.getPlayer().setFalling(false);
                     }
@@ -69,7 +72,7 @@ public class Panel extends JPanel implements KeyListener {
                     map.getPlayer().setJumping(false);
                 }
                 if(map.getPlayer().isFalling()){
-                    if(test[(int) (Math.ceil((float) yy /20)+1)][(int) Math.ceil((float) xx /20)]==0){
+                    if(test[(int) (Math.floor((float) yy /20) +1)][(int) Math.floor((float) xx /20)]==0){
                     yy+=1;
                     }
                     else{
@@ -77,12 +80,18 @@ public class Panel extends JPanel implements KeyListener {
                     }
                 }
             }
+            else{
+                System.out.println("GGS");
+            }
             x=0;
             y+=20;
         }
 
 
     }
+
+
+
 
 
 
@@ -96,23 +105,28 @@ public class Panel extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         char key= e.getKeyChar();
         if(key=='w'){
-            if(test[Math.round((float) yy /20)-1][Math.round((float) xx /20)]==0){
+            if(yy!=0){
+            if(test[(int) (Math.floor((float) yy /20)-1)][(int) Math.floor((float) xx /20)]==0){
                 map.getPlayer().setJumping(true);
                 yy-=20;
-            }
+            }}
         }
         if(key=='a'){
-            if(test[Math.round((float) yy /20)][Math.round((float) xx /20)-1]==0){
-            xx-=20;}
+            if(xx!=0){
+            if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==0){
+            xx-=20;}}
         }
         if(key == 's'){
-            if(test[Math.round((float) yy /20)+1][Math.round((float) xx /20)]==0){
-            yy+=20;}
+            if(yy!=1080){
+            if(test[(int) (Math.floor((float) yy /20)+1)][(int) Math.floor((float) xx /20)]==0){
+            yy+=20;}}
         }
         if(key == 'd'){
-            if(test[Math.round((float) yy /20)][Math.round((float) xx /20)+1]==0){
-            xx+=20;}
+            if(xx!=1920){
+            if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)+1]==0){
+            xx+=20;}}
         }
+
 
     }
 
@@ -122,4 +136,18 @@ public class Panel extends JPanel implements KeyListener {
 
     }
 
+    public int getEndRow() {
+        return endRow;
+    }
+    public int getEndCol() {
+        return endCol;
+    }
+
+    public void setEndRow(int endRow) {
+        this.endRow = endRow;
+    }
+
+    public void setEndCol(int endCol) {
+        this.endCol = endCol;
+    }
 }
