@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Font;
 
 public class Panel extends JPanel implements KeyListener {
 
@@ -45,6 +46,9 @@ public class Panel extends JPanel implements KeyListener {
         int x=0;
         int y=0;
         gameOver=false;
+        int endRow=map.getEndRow();
+        int endCol=map.getEndCol();
+
 
 
 
@@ -65,7 +69,7 @@ public class Panel extends JPanel implements KeyListener {
                         map.getPlayer().setFalling(false);
                     }
                     else{
-                    map.getPlayer().setFalling(true);}
+                        map.getPlayer().setFalling(true);}
                 }
                 else{
                     map.getPlayer().setFalling(false);
@@ -73,15 +77,20 @@ public class Panel extends JPanel implements KeyListener {
                 }
                 if(map.getPlayer().isFalling()){
                     if(test[(int) (Math.floor((float) yy /20) +1)][(int) Math.floor((float) xx /20)]==0){
-                    yy+=1;
+                        yy+=1;
                     }
                     else{
                         map.getPlayer().setFalling(false);
                     }
                 }
+                if(yy/20==endRow && xx/20==endCol){
+                    gameOver=true;
+                }
             }
             else{
-                System.out.println("GGS");
+                g.setFont(new Font("Courier New",Font.BOLD,100));
+                g.drawString("YOU WINNED",660,540);
+
             }
             x=0;
             y+=20;
@@ -104,29 +113,32 @@ public class Panel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char key= e.getKeyChar();
-        if(key=='w'){
-            if(yy!=0){
-            if(test[(int) (Math.floor((float) yy /20)-1)][(int) Math.floor((float) xx /20)]==0){
-                map.getPlayer().setJumping(true);
-                yy-=20;
-            }}
-        }
-        if(key=='a'){
-            if(xx!=0){
-            if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==0){
-            xx-=20;}}
-        }
-        if(key == 's'){
-            if(yy!=1080){
-            if(test[(int) (Math.floor((float) yy /20)+1)][(int) Math.floor((float) xx /20)]==0){
-            yy+=20;}}
-        }
-        if(key == 'd'){
-            if(xx!=1920){
-            if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)+1]==0){
-            xx+=20;}}
-        }
+        if(!gameOver){
+            if(key=='w'){
+                if(yy!=0){
+                    if(test[(int) (Math.floor((float) yy /20)-1)][(int) Math.floor((float) xx /20)]==0 || test[(int) (Math.floor((float) yy /20)-1)][(int) Math.floor((float) xx /20)]==3){
+                        map.getPlayer().setJumping(true);
+                        yy-=20;
+                    }}
+            }
+            if(key=='a'){
+                if(xx!=0){
+                    if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==3){
+                        xx-=20;}}
+            }
+            if(key == 's'){
+                if(yy!=1080){
+                    if(test[(int) (Math.floor((float) yy /20)+1)][(int) Math.floor((float) xx /20)]==0 || test[(int) (Math.floor((float) yy /20)+1)][(int) Math.floor((float) xx /20)]==3){
+                        yy+=20;}}
+            }
+            if(key == 'd'){
+                if(xx!=1920){
+                    if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)+1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)+1]==3){
+                        xx+=20;}}
+            }
 
+
+        }
 
     }
 

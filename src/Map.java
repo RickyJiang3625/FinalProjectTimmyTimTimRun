@@ -11,6 +11,8 @@ public class Map {
     private int[][] worldData;
     private int playerRow;
     private int  playerCol;
+    private int endRow;
+    private int endCol;
     public Map()  {
         generateMap();
 
@@ -51,11 +53,21 @@ public class Map {
                 this.player= new Player(i,j);
                 }
                 if(d.charAt(j) =='E'){
-                    worldData[i][j] = 4;
+                    worldData[i][j] = 3;
+                    endRow=i;
+                    endCol=j;
                 }
             }
         }
         return worldData;
+    }
+
+    public int getEndRow() {
+        return endRow;
+    }
+
+    public int getEndCol() {
+        return endCol;
     }
 
     public Tile[][] getMap() {
