@@ -1,5 +1,3 @@
-import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -92,14 +90,14 @@ public class Map {
             }
         }}
         public void movePlayer(String nesw){
-            playerRow=player.getRow();
-            playerCol=player.getCol();
+            playerRow=player.getY();
+            playerCol=player.getX();
 
             if(player.isFalling()){
-                player.setRow(playerRow+1);
+                player.setY(playerRow+1);
                 if(worldData[playerRow+1][playerCol] ==1 || worldData[playerRow+1][playerCol]==2){
                     player.setFalling(false);
-                    player.setRow(playerRow);
+                    player.setY(playerRow);
                 }
             }
             if(worldData[playerRow+1][playerCol]==0){
@@ -110,11 +108,11 @@ public class Map {
 
                 if(canMoveUp()){
                     player.setFalling(false);
-                    player.setRow((playerRow-1));
+                    player.setY((playerRow-1));
 
                 }
                 else{
-                    player.setRow((playerRow));
+                    player.setY((playerRow));
 
                 }
                 player.setFalling(true);
@@ -123,29 +121,29 @@ public class Map {
 
                 if(canMoveDown()){
                     player.setFalling(false);
-                    player.setRow((playerRow+1));
+                    player.setY((playerRow+1));
                 }
                 else{
-                    player.setRow(playerRow);
+                    player.setY(playerRow);
                 }
             }
             if(nesw.equals("D")){
                 if(canMoveRight()){
-                    player.setCol((playerCol+1));
+                    player.setX((playerCol+1));
 
                 }
 
 
                 else{
-                    player.setCol(playerCol);
+                    player.setX(playerCol);
                 }
             }
             if (nesw.equals("A")) {
                 if(canMoveLeft()){
-                    player.setCol((playerCol-1));
+                    player.setX((playerCol-1));
                 }
                 else{
-                    player.setCol(playerCol);
+                    player.setX(playerCol);
                 }
             }
         }

@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.awt.Rectangle;
 public class Player {
     private BufferedImage image;
-    private int row;
-    private int col;
+    private int y;
+    private int x;
 
 
 
@@ -15,32 +15,32 @@ public class Player {
     private boolean falling;
     private boolean jumping;
     private final String IMAGE="spriteimages/tempImage.png";
-    public Player(int row,int col){
-    this.row=row;
-    this.col=col;
+    public Player(int y,int x){
+    this.y = y*20;
+    this.x = x*20;
     image=loadImage(IMAGE);
     image=resize(image,20,20);
-    hitbox=new Rectangle(col*20,row*20,20,20);
+    hitbox=new Rectangle(x*20,y*20,20,20);
     }
 
     public BufferedImage getImage() {
         return image;
     }
 
-    public int getRow() {
-        return row;
+    public int getY() {
+        return y;
     }
 
-    public int getCol() {
-        return col;
+    public int getX() {
+        return x;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    public void setX(int x) {
+        this.x = x;
     }
 
     public Rectangle getHitbox() {
@@ -61,6 +61,7 @@ public class Player {
     public void setJumping(boolean jumping) {
         this.jumping = jumping;
     }
+
 
     public BufferedImage loadImage(String fileName) {
         try {
@@ -83,6 +84,19 @@ public class Player {
         g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
         g.dispose();
         return dimg;
+    }
+
+    public void moveLeft(){
+    x-=20;
+    }
+    public void moveRight(){
+    x+=20;
+    }
+    public void moveUp(){
+    y-=20;
+    }
+    public void moveDown(){
+    y+=20;
     }
 
 }
