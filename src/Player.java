@@ -21,6 +21,8 @@ public class Player {
     image=loadImage(IMAGE);
     image=resize(image,20,20);
     hitbox=new Rectangle(x*20,y*20,20,20);
+    falling=false;
+    jumping=false;
     }
 
     public BufferedImage getImage() {
@@ -86,17 +88,5 @@ public class Player {
         return dimg;
     }
 
-    public void moveLeft(){
-    x-=20;
-    }
-    public void moveRight(){
-    x+=20;
-    }
-    public void moveUp(){
-    y-=20;
-    }
-    public void moveDown(){
-    y+=20;
-    }
 
 }

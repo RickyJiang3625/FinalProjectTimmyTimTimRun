@@ -46,6 +46,7 @@ public class Panel extends JPanel implements KeyListener {
         int x=0;
         int y=0;
         gameOver=false;
+
         int endRow=map.getEndRow();
         int endCol=map.getEndCol();
         for(int row=0;row<map.getMap().length;row++){
@@ -71,7 +72,7 @@ public class Panel extends JPanel implements KeyListener {
                 }
                 if(map.getPlayer().isFalling()){
                     if(test[(int) (Math.floor((float) yy /20) +1)][(int) Math.floor((float) xx /20)]==0 || test[(int) (Math.floor((float) yy /20) +1)][(int) Math.floor((float) xx /20)]==3){
-                        yy+=0.01;
+                        yy+=0.005;
                     }
                     else{
                         map.getPlayer().setFalling(false);
@@ -108,12 +109,33 @@ public class Panel extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         char key= e.getKeyChar();
         if(!gameOver){
+
             if(key=='w'){
+                if(!map.getPlayer().isFalling()){
                 if(yy!=0){
-                    if(test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==0 || test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==3){
+                    if(test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==0 || test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==3) {
                         map.getPlayer().setJumping(true);
-                        yy-=20;
-                    }}
+                    }
+                    else{
+                        map.getPlayer().setJumping(false);
+
+                    }
+                        if(map.getPlayer().isJumping()){
+                            for(int i=0;i<6000;i++){
+                                yy-=0.01;
+                                if(test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.round((float) xx /20)]!=0){
+                                    map.getPlayer().setJumping(false);
+                                    i=5999;
+                                }
+
+                                if(i==5999){
+                                    map.getPlayer().setJumping(false);
+                                }
+                        }
+
+                        }
+                    }
+            }
             }
             if(key=='a'){
                 if(xx!=0){
