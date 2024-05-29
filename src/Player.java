@@ -14,6 +14,8 @@ public class Player {
     private Rectangle hitbox;
     private boolean falling;
     private boolean jumping;
+    private boolean movingLeft;
+    private boolean movingRight;
     private final String IMAGE="spriteimages/tempImage.png";
     public Player(int y,int x){
     this.y = y*20;
@@ -23,6 +25,8 @@ public class Player {
     hitbox=new Rectangle(x*20,y*20,20,20);
     falling=false;
     jumping=false;
+    movingLeft=false;
+    movingRight=false;
     }
 
     public BufferedImage getImage() {
@@ -64,6 +68,21 @@ public class Player {
         this.jumping = jumping;
     }
 
+    public boolean isMovingLeft() {
+        return movingLeft;
+    }
+
+    public void setMovingLeft(boolean movingLeft) {
+        this.movingLeft = movingLeft;
+    }
+
+    public boolean isMovingRight() {
+        return movingRight;
+    }
+
+    public void setMovingRight(boolean movingRight) {
+        this.movingRight = movingRight;
+    }
 
     public BufferedImage loadImage(String fileName) {
         try {
@@ -87,6 +106,7 @@ public class Player {
         g.dispose();
         return dimg;
     }
+
 
 
 }
