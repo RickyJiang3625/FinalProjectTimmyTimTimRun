@@ -120,11 +120,26 @@ public class Panel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char key= e.getKeyChar();
+        int howMany=(int) yy/20;
         if(!gameOver){
 
             if(key=='w'){
                 if(!map.getPlayer().isFalling()){
                 if(yy!=0){
+                    if(Math.ceil((float) yy/20 -1) < 0){
+
+                        for(int i=0;i<howMany*2000;i++){
+                            yy-=0.01;
+                            if(test[(int) (Math.ceil((float) yy /20)-1)][Math.round((float) xx /20)]!=0){
+                                map.getPlayer().setJumping(false);
+                                i=howMany*2000-1;
+                            }
+                            if(i==howMany*2000-1){
+                                map.getPlayer().setFalling(true);
+                            }
+                        }
+                    }
+                    else{
                     if(test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==0 || test[(int) (Math.ceil((float) yy /20)-1)][(int) Math.ceil((float) xx /20)]==3) {
                         map.getPlayer().setJumping(true);
                     }
@@ -146,7 +161,7 @@ public class Panel extends JPanel implements KeyListener {
                         }
 
                         }
-                    }
+                    }}}
             }
             }
             if(key=='a'){
@@ -170,7 +185,7 @@ public class Panel extends JPanel implements KeyListener {
 
         }
 
-    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
