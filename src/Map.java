@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class Map {
     private int  playerCol;
     private int endRow;
     private int endCol;
+
     public Map()  {
         generateMap();
 
@@ -39,11 +41,14 @@ public class Map {
         for (int i = 0; i < fileData.size(); i++) {
             String d = fileData.get(i);
             for (int j = 0; j < d.length(); j++) {
-                if (d.charAt(j) == 'P')
+                if (d.charAt(j) == 'P') {
                     worldData[i][j] = 2;
+
+                }
 
                 if (d.charAt(j) == 'D'){
                     worldData[i][j] = 1;
+
                 }
                 if (d.charAt(j) == 'A')
                     worldData[i][j] = 0;
@@ -89,7 +94,10 @@ public class Map {
                 map[r][c] = t;
             }
         }}
-        public void movePlayer(String nesw){
+
+
+
+    public void movePlayer(String nesw){
             playerRow=player.getY();
             playerCol=player.getX();
 
