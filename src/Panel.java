@@ -20,6 +20,7 @@ public class Panel extends JPanel implements KeyListener {
     private int endCol;
     private double gravitySpeed=0.001;
     private boolean collisionRight;
+    private boolean collisionLeft;
 
     public Panel()  {
         this.addKeyListener(this);
@@ -102,7 +103,7 @@ public class Panel extends JPanel implements KeyListener {
             moveRight(3.53234234);
         }
         if(map.getPlayer().isMovingLeft()){
-             moveLeft(10);
+             moveLeft(5);
         }
 
 
@@ -162,9 +163,6 @@ public class Panel extends JPanel implements KeyListener {
                                 }
 
                             }
-                            if(collisionRight){
-
-                            }
                         }
                     }
                 }
@@ -210,32 +208,50 @@ public class Panel extends JPanel implements KeyListener {
         }
     }
     public void moveRight(double distance){
-        if(xx!=1900){
+        if(xx!=1900) {
 
-            if(test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)+1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)+1]==3){
-                xx+=distance;
-                System.out.println("current x loc "+xx);
-                collisionRight=false;
+            if (test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 0 || test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 3) {
+                xx += distance;
 
-            }
-            else{
-                double nextX=  (xx+  (20-xx%20));
-                if(!collisionRight){
-                if(test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)+1]==1 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)+1]==2){
-                xx=nextX;
-                collisionRight=true;
+                collisionRight = false;
 
-            }
+            } else {
+                double nextX = (xx + (20 - xx % 20));
+                if (!collisionRight) {
+                    if (test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 1 || test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 2) {
+                        xx = nextX;
+                        collisionRight = true;
+
+                    }
                 }
+            }
+            if (map.getPlayer().isJumping() || map.getPlayer().isFalling() && test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 0 || test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 3) {
+                xx += distance;
             }
         }
     }
     public void moveLeft(double distance){
         if(xx!=0){
-            if(test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.floor((float) xx /20)-1]==3){
-                xx-=distance;
+                if(test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==3){
+                    xx-=distance;
+                    collisionLeft=false;
+
+                }
+                else{
+                    double nextX=  (xx+(20-xx%20));
+                    if(!collisionLeft){
+                        if(test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==1 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==2){
+                            xx=nextX-20;
+                            collisionLeft=true;
+
+                        }
+                    }
+                }
+                if(map.getPlayer().isJumping() && test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==3){
+                    xx-=distance;
+                }
 
             }
         }
     }
-}
+
