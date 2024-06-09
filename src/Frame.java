@@ -9,8 +9,8 @@ public class Frame extends JFrame implements Runnable {
     public Frame(String display)  {
         super(display);
 
-        int frameWidth = 500;
-        int frameHeight = 500;
+        int frameWidth = 1920;
+        int frameHeight = 1080;
         p = new Panel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
