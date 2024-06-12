@@ -60,6 +60,9 @@ public class Map {
                     endRow=i;
                     endCol=j;
                 }
+                if(d.charAt(j) == 'L'){
+                    worldData[i][j]=4;
+                }
             }
         }
         return worldData;
