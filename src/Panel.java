@@ -232,7 +232,7 @@ public class Panel extends JPanel implements KeyListener {
         }
     }
     public void moveRight(double distance){
-        if(xx!=1900) {
+        if(xx!=1900 && !gameOver) {
 
             if (test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 0 || test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 3 || test[(int) (Math.floor((float) yy / 20))][(int) Math.round((float) xx / 20) + 1] == 4) {
                 xx += distance;
@@ -257,7 +257,7 @@ public class Panel extends JPanel implements KeyListener {
         }
     }
     public void moveLeft(double distance){
-        if(xx!=0){
+        if(xx!=0 && !gameOver){
                 if(test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==0 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==3 || test[(int) (Math.floor((float) yy /20))][(int) Math.round((float) xx /20)-1]==4){
                     xx-=distance;
                     collisionLeft=false;
